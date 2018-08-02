@@ -39,7 +39,7 @@ class Login extends React.Component {
               Don't have account yet?
             </Typography>
             {'  '}
-            <Link className={classes.registerLink} to="/">
+            <Link className={classes.registerLink} to="/registration">
               Register
             </Link>
           </div>
