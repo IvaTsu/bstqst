@@ -1,15 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  TextField,
-  Typography,
-  Paper,
-  withStyles,
-  Button,
-} from '@material-ui/core';
+import { Typography, Paper, withStyles, Button } from '@material-ui/core';
+import { Field, reduxForm } from 'redux-form';
 import styles from './styles';
+import renderTextField from '../../../components/RenderInput';
 
-class Login extends React.Component {
+class Login extends Component {
   render() {
     const { classes } = this.props;
     return (
@@ -19,19 +15,21 @@ class Login extends React.Component {
             Log In
           </Typography>
           <form className={classes.container} noValidate autoComplete="off">
-            <TextField
-              id="e-mail"
+            <Field
+              name="email"
               label="E-mail"
               className={classes.textField}
               margin="normal"
+              component={renderTextField}
             />
-            <TextField
-              id="password-input"
+            <Field
+              name="password-input"
               label="Password"
               className={classes.textField}
               type="password"
               autoComplete="current-password"
               margin="normal"
+              component={renderTextField}
             />
           </form>
           <div className={classes.dontHaveAccount}>
@@ -56,4 +54,8 @@ class Login extends React.Component {
   }
 }
 
-export default withStyles(styles)(Login);
+const LoginFormGroup = reduxForm({
+  form: 'LoginForm',
+})(Login);
+
+export default withStyles(styles)(LoginFormGroup);
