@@ -28,7 +28,7 @@ const Header = props => {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="title" color="inherit" className={classes.flex}>
-            Best Guest
+            Best Guest Microsite
           </Typography>
           <Button color="inherit">
             <Link className={classes.link} to="/login">
