@@ -2,12 +2,25 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Typography, Paper, withStyles, Button } from '@material-ui/core';
 import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import styles from './styles';
+
+import { loginUser } from './actions';
 import renderTextField from '../../../components/RenderInput';
 
 class Login extends Component {
+  onSubmit = values => {
+    const { appVersion, cookieEnabled, platform } = window.navigator;
+    const { dispatch } = this.props;
+    const data = {
+      deviveType: 'Web',
+      ...values,
+    };
+    dispatch(loginUser(data));
+  };
   render() {
-    const { classes } = this.props;
+    const { classes, handleSubmit } = this.props;
     return (
       <div className={classes.wrap}>
         <Paper className={classes.root} elevation={1}>
@@ -23,7 +36,7 @@ class Login extends Component {
               component={renderTextField}
             />
             <Field
-              name="password-input"
+              name="password"
               label="Password"
               className={classes.textField}
               type="password"
@@ -42,7 +55,9 @@ class Login extends Component {
             </Link>
           </div>
           <Button
+            onClick={handleSubmit(this.onSubmit)}
             variant="contained"
+            type="submit"
             color="primary"
             className={classes.button}
           >
@@ -54,8 +69,44 @@ class Login extends Component {
   }
 }
 
+const mapStateToProps = (state, ownProps) => {
+  return {
+    test: state,
+  };
+};
+
 const LoginFormGroup = reduxForm({
   form: 'LoginForm',
 })(Login);
 
-export default withStyles(styles)(LoginFormGroup);
+export default compose(
+  withStyles(styles),
+  connect(
+    mapStateToProps,
+    { loginUser }
+  )
+)(LoginFormGroup);
+
+// TODO make it works with saga
+
+// componentWillMount = () => {
+//   const { appVersion, cookieEnabled, platform } = window.navigator;
+//   const data = {
+//     username: 'noro',
+//     password: 'test',
+
+//     deviceToken:
+//       'ef1def55d8ae07c7990ca694a818a5bccddfbec8f50ea06a063d712be3978a016289f491d1a43ef9c30fc82f773a7a33',
+//   };
+
+//   axios
+//     .post('http://api.bestguestapp.com/user/signIn', {
+//       data: JSON.stringify(data),
+//     })
+//     .then(function(response) {
+//       console.log(response);
+//     })
+//     .catch(function(error) {
+//       console.log(error);
+//     });
+// };
