@@ -11,10 +11,11 @@ import renderTextField from '../../../components/RenderInput';
 
 class Login extends Component {
   onSubmit = values => {
-    const { appVersion, cookieEnabled, platform } = window.navigator;
+    // const { appVersion, cookieEnabled, platform } = window.navigator;
     const { dispatch } = this.props;
     const data = {
-      deviveType: 'Web',
+      deviceToken:
+        'ef1def55d8ae07c7990ca694a818a5bccddfbec8f50ea06a063d712be3978a016289f491d1a43ef9c30fc82f773a7a33',
       ...values,
     };
     dispatch(loginUser(data));
@@ -29,7 +30,7 @@ class Login extends Component {
           </Typography>
           <form className={classes.container} noValidate autoComplete="off">
             <Field
-              name="email"
+              name="username"
               label="E-mail"
               className={classes.textField}
               margin="normal"
@@ -90,14 +91,6 @@ export default compose(
 // TODO make it works with saga
 
 // componentWillMount = () => {
-//   const { appVersion, cookieEnabled, platform } = window.navigator;
-//   const data = {
-//     username: 'noro',
-//     password: 'test',
-
-//     deviceToken:
-//       'ef1def55d8ae07c7990ca694a818a5bccddfbec8f50ea06a063d712be3978a016289f491d1a43ef9c30fc82f773a7a33',
-//   };
 
 //   axios
 //     .post('http://api.bestguestapp.com/user/signIn', {
