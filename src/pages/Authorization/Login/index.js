@@ -38,7 +38,7 @@ class Login extends Component {
             />
             <Field
               name="password"
-              label="Password"
+              label="Last Name"
               className={classes.textField}
               type="password"
               autoComplete="current-password"
@@ -87,19 +87,3 @@ export default compose(
     { loginUser }
   )
 )(LoginFormGroup);
-
-// TODO make it works with saga
-
-// componentWillMount = () => {
-
-//   axios
-//     .post('http://api.bestguestapp.com/user/signIn', {
-//       data: JSON.stringify(data),
-//     })
-//     .then(function(response) {
-//       console.log(response);
-//     })
-//     .catch(function(error) {
-//       console.log(error);
-//     });
-// };
