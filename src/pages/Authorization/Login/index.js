@@ -7,7 +7,7 @@ import { compose } from 'redux';
 import styles from './styles';
 
 import { loginUser } from './actions';
-import renderTextField from '../../../components/RenderInput';
+import renderTextField from '../../../components/RenderTextInput';
 
 class Login extends Component {
   onSubmit = values => {

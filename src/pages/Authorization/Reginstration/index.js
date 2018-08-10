@@ -5,7 +5,8 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import styles from './styles';
-import renderTextField from '../../../components/RenderInput';
+import renderTextField from '../../../components/RenderTextInput';
+import renderCheckBox from '../../../components/RenderCheckBox';
 
 class Reginstration extends Component {
   onSubmit = values => {};
@@ -13,20 +14,27 @@ class Reginstration extends Component {
     const { classes, handleSubmit } = this.props;
     return (
       <div className={classes.wrap}>
-        <Paper className={classes.root} elevation={1}>
-          <Typography variant="headline" component="h3">
-            Registration
-          </Typography>
-          <form className={classes.container} noValidate autoComplete="off">
+        <form className={classes.container} noValidate autoComplete="off">
+          <Paper className={classes.root} elevation={1}>
+            <Typography variant="headline" component="h3">
+              Registration
+            </Typography>
             <Field
-              name="username"
+              name="email"
+              label="E-mail"
+              className={classes.textField}
+              margin="normal"
+              component={renderTextField}
+            />
+            <Field
+              name="firstName"
               label="First Name"
               className={classes.textField}
               margin="normal"
               component={renderTextField}
             />
             <Field
-              name="password"
+              name="Last Name"
               label="Last Name"
               className={classes.textField}
               margin="normal"
@@ -34,30 +42,37 @@ class Reginstration extends Component {
             />
             <Field
               name="password"
-              label="Login Name"
+              label="Password"
               className={classes.textField}
               margin="normal"
               component={renderTextField}
             />
-          </form>
-          <div className={classes.dontHaveAccount}>
-            <Typography className={classes.account} component="p">
-              Back to
-            </Typography>
-            <Link className={classes.registerLink} to="/login">
-              Login
-            </Link>
-          </div>
-          <Button
-            onClick={handleSubmit(this.onSubmit)}
-            variant="contained"
-            type="submit"
-            color="primary"
-            className={classes.button}
-          >
-            Log In
-          </Button>
-        </Paper>
+            <Field
+              name="showPassword"
+              component={renderCheckBox}
+              label="Show password"
+            />
+            <Field
+              name="gdpr"
+              component={renderCheckBox}
+              label="I kindly confirm that I agree with something, something and especially something related to GDPR regulation."
+            />
+            <Button
+              onClick={handleSubmit(this.onSubmit)}
+              variant="contained"
+              type="submit"
+              color="primary"
+              className={classes.button}
+            >
+              Create account
+            </Button>
+            <div className={classes.dontHaveAccount}>
+              <Link className={classes.registerLink} to="/login">
+                Already have account? Log in.
+              </Link>
+            </div>
+          </Paper>
+        </form>
       </div>
     );
   }
