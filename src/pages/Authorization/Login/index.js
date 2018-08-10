@@ -48,6 +48,15 @@ class Login extends Component {
           </form>
           <div className={classes.dontHaveAccount}>
             <Typography className={classes.account} component="p">
+              Forgot password or user name?
+            </Typography>
+            {'  '}
+            <Link className={classes.registerLink} to="/reset-password">
+              Recovery password
+            </Link>
+          </div>
+          <div className={classes.dontHaveAccount}>
+            <Typography className={classes.account} component="p">
               Don't have account yet?
             </Typography>
             {'  '}

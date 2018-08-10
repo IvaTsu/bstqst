@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Typography, Paper, withStyles, Button } from '@material-ui/core';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import styles from './styles';
 
+import styles from './styles';
 import { validate, asyncValidate } from '../../../middleware/validation';
 import renderTextField from '../../../components/RenderTextInput';
+import { resetPassword } from './actions';
 
 class ResetPassword extends Component {
   onSubmit = values => {
-    // const { appVersion, cookieEnabled, platform } = window.navigator;
-    const { dispatch } = this.props;
+    const { dispatch, reset } = this.props;
+    dispatch(resetPassword(values));
+    reset();
     console.log(values);
   };
   render() {
-    const { classes, handleSubmit } = this.props;
+    const { classes, handleSubmit, pristine, submitting } = this.props;
     return (
       <div className={classes.wrap}>
         <Paper className={classes.root} elevation={1}>
@@ -37,6 +38,7 @@ class ResetPassword extends Component {
               type="submit"
               color="primary"
               className={classes.button}
+              disabled={pristine || submitting}
             >
               Recover password
             </Button>
@@ -61,5 +63,8 @@ const ResetPasswordFormGroup = reduxForm({
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps)
+  connect(
+    mapStateToProps,
+    { resetPassword }
+  )
 )(ResetPasswordFormGroup);
