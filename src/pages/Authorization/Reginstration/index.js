@@ -43,6 +43,7 @@ class Reginstration extends Component {
             <Field
               name="password"
               label="Password"
+              type="password"
               className={classes.textField}
               margin="normal"
               component={renderTextField}
