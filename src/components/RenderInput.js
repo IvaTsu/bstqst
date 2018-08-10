@@ -7,13 +7,7 @@ const renderTextField = ({
   meta: { touched, error },
   ...custom
 }) => (
-  <TextField
-    hintText={label}
-    floatingLabelText={label}
-    errorText={touched && error}
-    {...input}
-    {...custom}
-  />
+  <TextField label={label} error={touched && error} {...input} {...custom} />
 );
 
 export default renderTextField;
