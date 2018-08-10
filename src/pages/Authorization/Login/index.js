@@ -38,7 +38,7 @@ class Login extends Component {
             />
             <Field
               name="password"
-              label="Last Name"
+              label="Password"
               className={classes.textField}
               type="password"
               autoComplete="current-password"
